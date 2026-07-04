@@ -8,10 +8,11 @@
     "servico": "Unha em Gel",
     "valorServico": 270,
     "local": "estabelecimento",
-    "custo": null,
-    "ganho": null,
+    "custo": 100,
+    "ganho": 170,
     "comprovantePath": "bookings/uploads/1783195096241-6zicss.png",
     "status": "novo",
-    "createdAt": "2026-07-04T19:58:17.204Z"
+    "createdAt": "2026-07-04T19:58:17.204Z",
+    "updatedAt": "2026-07-04T20:00:16.390Z"
   }
 ]
