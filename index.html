@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AD Dunna Beauty Studio — Agenda Eletrônica</title>
+<title>AD Dunna Beauty Studio â Agenda EletrÃ´nica</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Yellowtail&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -428,7 +428,7 @@
 <body>
 <div class="app">
 
-  <!-- ============ SCREEN 1 — DADOS DA CLIENTE ============ -->
+  <!-- ============ SCREEN 1 â DADOS DA CLIENTE ============ -->
   <section class="screen active" id="screen1">
     <div class="content">
       <svg class="brand-badge" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
@@ -475,7 +475,7 @@
 
         <path d="M95,218 C110,224 150,224 165,218" stroke="#c9a06c" stroke-width="1" fill="none"/>
       </svg>
-      <p class="tagline">Agende seu horário com Ana Paula</p>
+      <p class="tagline">Agende seu horÃ¡rio com Ana Paula</p>
       <form id="formCliente">
         <label for="nomeCompleto">Nome completo</label>
         <input type="text" id="nomeCompleto" placeholder="Digite seu nome completo" autocomplete="name">
@@ -483,38 +483,38 @@
 
         <label for="telefone">Telefone / WhatsApp</label>
         <input type="tel" id="telefone" placeholder="(11) 90000-0000" autocomplete="tel">
-        <span class="field-error" id="erroTelefone">Por favor, informe um telefone válido.</span>
+        <span class="field-error" id="erroTelefone">Por favor, informe um telefone vÃ¡lido.</span>
 
         <button type="submit" class="btn-primary">Continuar</button>
       </form>
     </div>
   </section>
 
-  <!-- ============ SCREEN 2 — AGENDAMENTO ============ -->
+  <!-- ============ SCREEN 2 â AGENDAMENTO ============ -->
   <section class="screen" id="screen2">
     <div class="content">
       <div class="mini-brand">AD <span class="script">Dunna</span> Beauty Studio</div>
-      <button class="btn-back" data-target="screen1">← Voltar</button>
-      <h2>Escolha o dia e horário</h2>
+      <button class="btn-back" data-target="screen1">â Voltar</button>
+      <h2>Escolha o dia e horÃ¡rio</h2>
 
       <div class="calendar-time-wrap">
         <div class="calendar">
           <div class="cal-header">
-            <button type="button" id="prevMonth">‹</button>
+            <button type="button" id="prevMonth">â¹</button>
             <span id="monthLabel"></span>
-            <button type="button" id="nextMonth">›</button>
+            <button type="button" id="nextMonth">âº</button>
           </div>
           <div class="cal-grid" id="calGrid"></div>
         </div>
         <div class="time-picker">
-          <h3>Horário</h3>
+          <h3>HorÃ¡rio</h3>
           <div class="time-grid" id="timeGrid"></div>
         </div>
       </div>
 
-      <label for="servico">Tipo de serviço</label>
+      <label for="servico">Tipo de serviÃ§o</label>
       <select id="servico">
-        <option value="">Selecione um serviço...</option>
+        <option value="">Selecione um serviÃ§o...</option>
       </select>
       <div class="price-display" id="precoServico"></div>
 
@@ -522,7 +522,7 @@
       <div class="location-options">
         <label class="radio-card">
           <input type="radio" name="local" value="estabelecimento" checked>
-          No estúdio da Ana Paula
+          No estÃºdio da Ana Paula
         </label>
         <label class="radio-card">
           <input type="radio" name="local" value="residencial">
@@ -530,7 +530,7 @@
         </label>
       </div>
       <p class="deslocamento-note" id="deslocamentoNote" style="display:none;">
-        🚗 Atendimento residencial: a taxa de deslocamento é combinada diretamente com a Ana Paula, de acordo com o endereço.
+        ð Atendimento residencial: a taxa de deslocamento Ã© combinada diretamente com a Ana Paula, de acordo com o endereÃ§o.
       </p>
 
       <div class="summary-box" id="resumoValor" style="display:none;"></div>
@@ -539,11 +539,11 @@
     </div>
   </section>
 
-  <!-- ============ SCREEN 3 — PAGAMENTO PIX ============ -->
+  <!-- ============ SCREEN 3 â PAGAMENTO PIX ============ -->
   <section class="screen" id="screen3">
     <div class="content">
       <div class="mini-brand">AD <span class="script">Dunna</span> Beauty Studio</div>
-      <button class="btn-back" data-target="screen2">← Voltar</button>
+      <button class="btn-back" data-target="screen2">â Voltar</button>
       <h2>Confirme e pague o sinal</h2>
 
       <div class="summary-card" id="resumoFinal"></div>
@@ -560,7 +560,7 @@
 
       <label for="comprovante">Enviar comprovante do PIX</label>
       <div class="upload-wrap">
-        <span>📎 Toque para <strong>anexar o comprovante</strong> (foto ou PDF)</span>
+        <span>ð Toque para <strong>anexar o comprovante</strong> (foto ou PDF)</span>
         <input type="file" id="comprovante" accept="image/*,.pdf">
       </div>
       <div id="comprovantePreview"></div>
@@ -569,15 +569,15 @@
     </div>
   </section>
 
-  <!-- ============ SCREEN 4 — CONFIRMAÇÃO ============ -->
+  <!-- ============ SCREEN 4 â CONFIRMAÃÃO ============ -->
   <section class="screen" id="screen4">
     <div class="content confirmation">
       <div class="mini-brand">AD <span class="script">Dunna</span> Beauty Studio</div>
-      <div class="check-icon">✓</div>
+      <div class="check-icon">â</div>
       <h2>Agendamento enviado!</h2>
-      <p>Recebemos seus dados. Toque no botão abaixo para enviar o resumo e o comprovante para a Ana Paula pelo WhatsApp e confirmar seu horário.</p>
+      <p>Recebemos seus dados. Toque no botÃ£o abaixo para enviar o resumo e o comprovante para a Ana Paula pelo WhatsApp e confirmar seu horÃ¡rio.</p>
       <div class="summary-card" id="resumoConfirmacao" style="text-align:left;"></div>
-      <a class="btn-primary" id="btnWhatsapp" target="_blank" rel="noopener">Enviar confirmação via WhatsApp</a>
+      <a class="btn-primary" id="btnWhatsapp" target="_blank" rel="noopener">Enviar confirmaÃ§Ã£o via WhatsApp</a>
       <button class="btn-secondary" id="btnNovoAgendamento" type="button">Novo agendamento</button>
     </div>
   </section>
@@ -600,17 +600,17 @@
 
   const SERVICOS = {
     unha:{label:'Unha', preco:45},
-    pe:{label:'Só pé', preco:45},
-    unha_pe:{label:'Unha e pé', preco:80},
+    pe:{label:'SÃ³ pÃ©', preco:45},
+    unha_pe:{label:'Unha e pÃ©', preco:80},
     gel:{label:'Unha em Gel', preco:270},
-    manutencao_gel:{label:'Manutenção de unha em Gel', preco:180}
+    manutencao_gel:{label:'ManutenÃ§Ã£o de unha em Gel', preco:180}
   };
 
   function fmtMoeda(v){
     return 'R$ ' + v.toFixed(2).replace('.', ',');
   }
 
-  // ---------------- NAVEGAÇÃO ----------------
+  // ---------------- NAVEGAÃÃO ----------------
   function irPara(id){
     document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
@@ -648,12 +648,12 @@
     irPara('screen2');
   });
 
-  // ---------------- CALENDÁRIO ----------------
+  // ---------------- CALENDÃRIO ----------------
   let calRef = new Date();
   calRef.setDate(1);
   const monthLabel = document.getElementById('monthLabel');
   const calGrid = document.getElementById('calGrid');
-  const MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  const MESES = ['Janeiro','Fevereiro','MarÃ§o','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
   const DOWS = ['D','S','T','Q','Q','S','S'];
 
   function renderCalendario(){
@@ -714,7 +714,7 @@
   });
   renderCalendario();
 
-  // ---------------- HORÁRIOS ----------------
+  // ---------------- HORÃRIOS ----------------
   const timeGrid = document.getElementById('timeGrid');
   function gerarHorarios(){
     const horarios = [];
@@ -737,19 +737,19 @@
   }
   gerarHorarios();
 
-  // ---------------- SERVIÇO ----------------
+  // ---------------- SERVIÃO ----------------
   const selectServico = document.getElementById('servico');
   Object.keys(SERVICOS).forEach(key=>{
     const opt = document.createElement('option');
     opt.value = key;
-    opt.textContent = SERVICOS[key].label + ' — ' + fmtMoeda(SERVICOS[key].preco);
+    opt.textContent = SERVICOS[key].label + ' â ' + fmtMoeda(SERVICOS[key].preco);
     selectServico.appendChild(opt);
   });
   const precoServico = document.getElementById('precoServico');
   selectServico.addEventListener('change', ()=>{
     state.servicoKey = selectServico.value || null;
     if(state.servicoKey){
-      precoServico.textContent = 'Valor do serviço: ' + fmtMoeda(SERVICOS[state.servicoKey].preco);
+      precoServico.textContent = 'Valor do serviÃ§o: ' + fmtMoeda(SERVICOS[state.servicoKey].preco);
     } else {
       precoServico.textContent = '';
     }
@@ -766,7 +766,7 @@
     });
   });
 
-  // ---------------- RESUMO / VALIDAÇÃO SCREEN 2 ----------------
+  // ---------------- RESUMO / VALIDAÃÃO SCREEN 2 ----------------
   const resumoValor = document.getElementById('resumoValor');
   const btnProsseguir = document.getElementById('btnProsseguir');
 
@@ -777,12 +777,12 @@
     if(completo){
       const servico = SERVICOS[state.servicoKey];
       const dataFmt = state.dataSelecionada.toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit', year:'numeric'});
-      const localTexto = state.local === 'residencial' ? 'Residencial (taxa de deslocamento a combinar)' : 'No estúdio da Ana Paula';
+      const localTexto = state.local === 'residencial' ? 'Residencial (taxa de deslocamento a combinar)' : 'No estÃºdio da Ana Paula';
       resumoValor.style.display = 'block';
       resumoValor.innerHTML =
         '<strong>Data:</strong> ' + dataFmt + '<br>' +
-        '<strong>Horário:</strong> ' + state.horario + '<br>' +
-        '<strong>Serviço:</strong> ' + servico.label + ' — ' + fmtMoeda(servico.preco) + '<br>' +
+        '<strong>HorÃ¡rio:</strong> ' + state.horario + '<br>' +
+        '<strong>ServiÃ§o:</strong> ' + servico.label + ' â ' + fmtMoeda(servico.preco) + '<br>' +
         '<strong>Local:</strong> ' + localTexto;
     } else {
       resumoValor.style.display = 'none';
@@ -794,20 +794,20 @@
     irPara('screen3');
   });
 
-  // ---------------- SCREEN 3 — PAGAMENTO ----------------
+  // ---------------- SCREEN 3 â PAGAMENTO ----------------
   const resumoFinal = document.getElementById('resumoFinal');
   const sinalValorEl = document.getElementById('sinalValor');
 
   function montarResumoPagamento(){
     const servico = SERVICOS[state.servicoKey];
     const dataFmt = state.dataSelecionada.toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit', year:'numeric'});
-    const localTexto = state.local === 'residencial' ? 'Residencial (taxa de deslocamento a combinar)' : 'No estúdio da Ana Paula';
+    const localTexto = state.local === 'residencial' ? 'Residencial (taxa de deslocamento a combinar)' : 'No estÃºdio da Ana Paula';
 
     resumoFinal.innerHTML =
       '<strong>Cliente:</strong> ' + state.nome + '<br>' +
       '<strong>Telefone:</strong> ' + state.telefone + '<br>' +
-      '<strong>Data:</strong> ' + dataFmt + ' às ' + state.horario + '<br>' +
-      '<strong>Serviço:</strong> ' + servico.label + ' — ' + fmtMoeda(servico.preco) + '<br>' +
+      '<strong>Data:</strong> ' + dataFmt + ' Ã s ' + state.horario + '<br>' +
+      '<strong>ServiÃ§o:</strong> ' + servico.label + ' â ' + fmtMoeda(servico.preco) + '<br>' +
       '<strong>Local:</strong> ' + localTexto;
 
     const sinal = servico.preco * 0.5;
@@ -848,7 +848,7 @@
         previewComprovante.innerHTML = '<img src="'+ev.target.result+'" alt="comprovante"> Anexado: ' + file.name;
       } else {
         previewComprovante.style.display = 'flex';
-        previewComprovante.innerHTML = '📎 Anexado: ' + file.name;
+        previewComprovante.innerHTML = 'ð Anexado: ' + file.name;
       }
     };
     reader.readAsDataURL(file);
@@ -861,29 +861,29 @@
   btnFinalizar.addEventListener('click', function(){
     const servico = SERVICOS[state.servicoKey];
     const dataFmt = state.dataSelecionada.toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit', year:'numeric'});
-    const localTexto = state.local === 'residencial' ? 'Residencial (taxa de deslocamento a combinar)' : 'No estúdio da Ana Paula';
+    const localTexto = state.local === 'residencial' ? 'Residencial (taxa de deslocamento a combinar)' : 'No estÃºdio da Ana Paula';
     const sinal = servico.preco * 0.5;
 
     resumoConfirmacao.innerHTML =
       '<strong>Cliente:</strong> ' + state.nome + '<br>' +
       '<strong>Telefone:</strong> ' + state.telefone + '<br>' +
-      '<strong>Data:</strong> ' + dataFmt + ' às ' + state.horario + '<br>' +
-      '<strong>Serviço:</strong> ' + servico.label + ' — ' + fmtMoeda(servico.preco) + '<br>' +
+      '<strong>Data:</strong> ' + dataFmt + ' Ã s ' + state.horario + '<br>' +
+      '<strong>ServiÃ§o:</strong> ' + servico.label + ' â ' + fmtMoeda(servico.preco) + '<br>' +
       '<strong>Local:</strong> ' + localTexto + '<br>' +
       '<strong>Sinal pago (50%):</strong> ' + fmtMoeda(sinal) + '<br>' +
-      '<strong>Comprovante:</strong> ' + (state.comprovanteNome || '—');
+      '<strong>Comprovante:</strong> ' + (state.comprovanteNome || 'â');
 
-    const msg = 'Olá Ana Paula! Gostaria de confirmar meu agendamento:%0A' +
+    const msg = 'OlÃ¡ Ana Paula! Gostaria de confirmar meu agendamento:%0A' +
       'Nome: ' + state.nome + '%0A' +
       'Telefone: ' + state.telefone + '%0A' +
-      'Data: ' + dataFmt + ' às ' + state.horario + '%0A' +
-      'Serviço: ' + servico.label + ' (' + fmtMoeda(servico.preco) + ')%0A' +
+      'Data: ' + dataFmt + ' Ã s ' + state.horario + '%0A' +
+      'ServiÃ§o: ' + servico.label + ' (' + fmtMoeda(servico.preco) + ')%0A' +
       'Local: ' + localTexto + '%0A' +
-      'Sinal de 50%25 (' + fmtMoeda(sinal) + ') já enviado via PIX. Segue o comprovante em anexo!';
-    btnWhatsapp.href = 'https://wa.me/5511984295971?text=' + msg;
+      'Sinal de 50%25 (' + fmtMoeda(sinal) + ') jÃ¡ enviado via PIX. Segue o comprovante em anexo!';
+    btnWhatsapp.href = 'https://wa.me/5511940485876?text=' + msg;
 
-    // Envia o agendamento para o painel admin (grava no GitHub via função do Netlify).
-    // Isso roda em segundo plano e não bloqueia o fluxo da cliente mesmo se falhar.
+    // Envia o agendamento para o painel admin (grava no GitHub via funÃ§Ã£o do Netlify).
+    // Isso roda em segundo plano e nÃ£o bloqueia o fluxo da cliente mesmo se falhar.
     fetch('/.netlify/functions/save-booking', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -905,7 +905,7 @@
   });
 
   document.getElementById('btnNovoAgendamento').addEventListener('click', function(){
-    // Reseta apenas os campos de agendamento, mantém nome/telefone
+    // Reseta apenas os campos de agendamento, mantÃ©m nome/telefone
     state.dataSelecionada = null;
     state.horario = null;
     state.servicoKey = null;
