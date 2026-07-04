@@ -436,6 +436,11 @@
   const senhaInput = document.getElementById('senhaInput');
   const loginError = document.getElementById('loginError');
 
+  const bookingsList = document.getElementById('bookingsList');
+  const loadingState = document.getElementById('loadingState');
+  const emptyState = document.getElementById('emptyState');
+  const errorState = document.getElementById('errorState');
+
   function tentarLogin(){
     if(senhaInput.value === ADMIN_PASSWORD){
       loginBox.style.display = 'none';
@@ -566,11 +571,6 @@
     if(v === null || v === undefined || isNaN(v)) return '—';
     return 'R$ ' + Number(v).toFixed(2).replace('.', ',');
   }
-
-  const bookingsList = document.getElementById('bookingsList');
-  const loadingState = document.getElementById('loadingState');
-  const emptyState = document.getElementById('emptyState');
-  const errorState = document.getElementById('errorState');
 
   async function carregarAgendamentos(){
     loadingState.style.display = 'block';
