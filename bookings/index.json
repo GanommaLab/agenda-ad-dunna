@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "id": "1783203946298-xr1hkm",
+    "nome": "maycon Dias",
+    "telefone": "+5511959589438",
+    "data": "04/07/2026",
+    "horario": "09:00",
+    "servico": "Manutenção de unha em Gel",
+    "valorServico": 180,
+    "local": "residencial",
+    "custo": null,
+    "ganho": null,
+    "comprovantePath": "bookings/uploads/1783203946298-xr1hkm.png",
+    "status": "novo",
+    "createdAt": "2026-07-04T22:25:47.737Z"
+  }
+]
