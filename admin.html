@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AD Dunna Beauty Studio — Painel Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blush-1:#f8e6df;
+    --blush-2:#f3d7cd;
+    --blush-3:#eeccc0;
+    --gold:#b9905a;
+    --gold-dark:#9c7642;
+    --rose-deep:#c47b7f;
+    --text-dark:#4a3630;
+    --text-soft:#7a6459;
+    --green:#5a8a5a;
+    --danger:#c0555a;
+    --white:#fffaf7;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(160deg,#f3ddd3,#ecc9bd 55%,#e6bdb3);
+    color:var(--text-dark);
+    padding:24px 14px;
+  }
+  h1,h2{font-family:'Playfair Display',serif; color:var(--gold-dark);}
+
+  /* -------- LOGIN -------- */
+  #loginBox{
+    max-width:360px;
+    margin:80px auto;
+    background:var(--white);
+    border-radius:22px;
+    padding:36px 30px;
+    box-shadow:0 25px 60px -15px rgba(120,70,60,0.35);
+    text-align:center;
+  }
+  #loginBox h1{font-size:1.6rem; margin-bottom:6px;}
+  #loginBox p{color:var(--text-soft); font-size:0.85rem; margin-bottom:20px;}
+  #loginBox input{
+    width:100%;
+    padding:13px 14px;
+    border-radius:14px;
+    border:1.5px solid #e8d3c8;
+    font-family:'Poppins',sans-serif;
+    font-size:0.95rem;
+    margin-bottom:14px;
+    outline:none;
+  }
+  #loginBox input:focus{border-color:var(--gold); box-shadow:0 0 0 3px rgba(185,144,90,0.15);}
+  #loginBox button{
+    width:100%;
+    padding:13px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(120deg,var(--gold),var(--gold-dark));
+    color:#fff;
+    font-weight:600;
+    font-size:0.95rem;
+    cursor:pointer;
+  }
+  #loginError{color:var(--danger); font-size:0.8rem; margin-top:10px; display:none;}
+
+  /* -------- DASHBOARD -------- */
+  #dashboard{display:none; max-width:1100px; margin:0 auto;}
+  .top-bar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:20px;
+  }
+  .top-bar h1{margin:0; font-size:1.7rem;}
+  .top-bar .actions{display:flex; gap:10px;}
+  .btn{
+    padding:10px 18px;
+    border-radius:12px;
+    border:none;
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    font-size:0.85rem;
+    cursor:pointer;
+  }
+  .btn-gold{background:linear-gradient(120deg,var(--gold),var(--gold-dark)); color:#fff;}
+  .btn-outline{background:transparent; border:1.5px solid var(--gold-dark); color:var(--gold-dark);}
+
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:14px;
+    margin-bottom:24px;
+  }
+  .stat-card{
+    background:var(--white);
+    border-radius:16px;
+    padding:16px 18px;
+    box-shadow:0 8px 24px -12px rgba(120,70,60,0.25);
+  }
+  .stat-card span{display:block; font-size:0.75rem; color:var(--text-soft); margin-bottom:4px;}
+  .stat-card strong{font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--gold-dark);}
+
+  #bookingsList{display:flex; flex-direction:column; gap:14px;}
+  .booking-card{
+    background:var(--white);
+    border-radius:18px;
+    padding:18px 20px;
+    box-shadow:0 10px 26px -14px rgba(120,70,60,0.3);
+    display:grid;
+    grid-template-columns:1.3fr 1fr 1fr auto;
+    gap:16px;
+    align-items:center;
+  }
+  .booking-card .info strong{color:var(--gold-dark);}
+  .booking-card .info p{margin:2px 0; font-size:0.85rem;}
+  .badge{
+    display:inline-block;
+    font-size:0.68rem;
+    font-weight:600;
+    padding:3px 9px;
+    border-radius:20px;
+    background:var(--blush-1);
+    color:var(--gold-dark);
+    margin-left:6px;
+  }
+  .badge.residencial{background:#fbeceb; color:var(--rose-deep);}
+
+  .money-field label{
+    display:block;
+    font-size:0.72rem;
+    color:var(--text-soft);
+    margin-bottom:3px;
+    font-weight:600;
+  }
+  .money-field input{
+    width:100%;
+    padding:8px 10px;
+    border-radius:10px;
+    border:1.5px solid #e8d3c8;
+    font-family:'Poppins',sans-serif;
+    font-size:0.85rem;
+  }
+  .ganho-value{font-weight:700; font-size:0.95rem;}
+  .ganho-value.positivo{color:var(--green);}
+  .ganho-value.negativo{color:var(--danger);}
+
+  .card-actions{display:flex; flex-direction:column; gap:8px; min-width:120px;}
+  .card-actions button{
+    padding:8px 12px;
+    border-radius:10px;
+    border:1.5px solid var(--gold-dark);
+    background:transparent;
+    color:var(--gold-dark);
+    font-size:0.8rem;
+    font-weight:600;
+    cursor:pointer;
+  }
+  .card-actions button.salvar{
+    background:linear-gradient(120deg,var(--gold),var(--gold-dark));
+    color:#fff;
+    border:none;
+  }
+  .card-actions button:disabled{opacity:0.5; cursor:not-allowed;}
+
+  #emptyState, #loadingState, #errorState{
+    text-align:center;
+    padding:60px 20px;
+    color:var(--text-soft);
+  }
+  #errorState{color:var(--danger); display:none;}
+
+  @media (max-width:820px){
+    .booking-card{grid-template-columns:1fr; }
+    .card-actions{flex-direction:row; flex-wrap:wrap;}
+  }
+</style>
+</head>
+<body>
+
+  <div id="loginBox">
+    <h1>Painel Admin</h1>
+    <p>AD Dunna Beauty Studio</p>
+    <input type="password" id="senhaInput" placeholder="Digite a senha" autocomplete="off">
+    <button id="btnEntrar">Entrar</button>
+    <p id="loginError">Senha incorreta.</p>
+  </div>
+
+  <div id="dashboard">
+    <div class="top-bar">
+      <h1>Agendamentos</h1>
+      <div class="actions">
+        <button class="btn btn-outline" id="btnAtualizar">↻ Atualizar</button>
+        <button class="btn btn-outline" id="btnSair">Sair</button>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat-card"><span>Total de pedidos</span><strong id="statTotal">0</strong></div>
+      <div class="stat-card"><span>Faturamento (valor dos serviços)</span><strong id="statFaturamento">R$ 0,00</strong></div>
+      <div class="stat-card"><span>Custos lançados</span><strong id="statCustos">R$ 0,00</strong></div>
+      <div class="stat-card"><span>Ganho total</span><strong id="statGanho">R$ 0,00</strong></div>
+    </div>
+
+    <div id="loadingState">Carregando agendamentos...</div>
+    <div id="errorState"></div>
+    <div id="emptyState" style="display:none;">Nenhum agendamento recebido ainda.</div>
+    <div id="bookingsList"></div>
+  </div>
+
+<script>
+(function(){
+  // ---------- CONFIG ----------
+  const ADMIN_PASSWORD = "duarte351"; // definido pelo dono do site
+  const GITHUB_OWNER = "GanommaLab";
+  const GITHUB_REPO = "agenda-ad-dunna";
+  const GITHUB_BRANCH = "main";
+  const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}`;
+
+  const loginBox = document.getElementById('loginBox');
+  const dashboard = document.getElementById('dashboard');
+  const senhaInput = document.getElementById('senhaInput');
+  const loginError = document.getElementById('loginError');
+
+  function tentarLogin(){
+    if(senhaInput.value === ADMIN_PASSWORD){
+      loginBox.style.display = 'none';
+      dashboard.style.display = 'block';
+      sessionStorage.setItem('addunna_admin_ok', '1');
+      carregarAgendamentos();
+    } else {
+      loginError.style.display = 'block';
+    }
+  }
+  document.getElementById('btnEntrar').addEventListener('click', tentarLogin);
+  senhaInput.addEventListener('keydown', e => { if(e.key === 'Enter') tentarLogin(); });
+
+  document.getElementById('btnSair').addEventListener('click', () => {
+    sessionStorage.removeItem('addunna_admin_ok');
+    location.reload();
+  });
+
+  if(sessionStorage.getItem('addunna_admin_ok') === '1'){
+    loginBox.style.display = 'none';
+    dashboard.style.display = 'block';
+    carregarAgendamentos();
+  }
+
+  document.getElementById('btnAtualizar').addEventListener('click', carregarAgendamentos);
+
+  function fmtMoeda(v){
+    if(v === null || v === undefined || isNaN(v)) return '—';
+    return 'R$ ' + Number(v).toFixed(2).replace('.', ',');
+  }
+
+  const bookingsList = document.getElementById('bookingsList');
+  const loadingState = document.getElementById('loadingState');
+  const emptyState = document.getElementById('emptyState');
+  const errorState = document.getElementById('errorState');
+
+  async function carregarAgendamentos(){
+    loadingState.style.display = 'block';
+    emptyState.style.display = 'none';
+    errorState.style.display = 'none';
+    bookingsList.innerHTML = '';
+
+    try{
+      const res = await fetch(`${RAW_BASE}/bookings/index.json?t=${Date.now()}`, { cache: 'no-store' });
+      if(res.status === 404){
+        loadingState.style.display = 'none';
+        emptyState.style.display = 'block';
+        atualizarStats([]);
+        return;
+      }
+      if(!res.ok) throw new Error('HTTP ' + res.status);
+      const bookings = await res.json();
+      loadingState.style.display = 'none';
+
+      if(!bookings.length){
+        emptyState.style.display = 'block';
+        atualizarStats([]);
+        return;
+      }
+
+      bookings
+        .slice()
+        .sort((a,b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0))
+        .forEach(renderBooking);
+
+      atualizarStats(bookings);
+    } catch(err){
+      loadingState.style.display = 'none';
+      errorState.style.display = 'block';
+      errorState.textContent = 'Não consegui carregar os agendamentos agora. Tente atualizar em alguns segundos. (' + err.message + ')';
+    }
+  }
+
+  function atualizarStats(bookings){
+    const total = bookings.length;
+    const faturamento = bookings.reduce((s,b) => s + (Number(b.valorServico) || 0), 0);
+    const custos = bookings.reduce((s,b) => s + (b.custo != null ? Number(b.custo) : 0), 0);
+    const ganho = bookings.reduce((s,b) => s + (b.ganho != null ? Number(b.ganho) : 0), 0);
+    document.getElementById('statTotal').textContent = total;
+    document.getElementById('statFaturamento').textContent = fmtMoeda(faturamento);
+    document.getElementById('statCustos').textContent = fmtMoeda(custos);
+    document.getElementById('statGanho').textContent = fmtMoeda(ganho);
+  }
+
+  function renderBooking(b){
+    const card = document.createElement('div');
+    card.className = 'booking-card';
+
+    const localBadge = b.local === 'residencial'
+      ? '<span class="badge residencial">Residencial</span>'
+      : '<span class="badge">Estúdio</span>';
+
+    const comprovanteUrl = b.comprovantePath ? `${RAW_BASE}/${b.comprovantePath}` : null;
+
+    card.innerHTML = `
+      <div class="info">
+        <strong>${escapeHtml(b.nome || '—')}</strong>${localBadge}
+        <p>📞 ${escapeHtml(b.telefone || '—')}</p>
+        <p>💇 ${escapeHtml(b.servico || '—')} — <strong>${fmtMoeda(b.valorServico)}</strong></p>
+      </div>
+      <div class="info">
+        <p>📅 <strong>${escapeHtml(b.data || '—')}</strong></p>
+        <p>⏰ <strong>${escapeHtml(b.horario || '—')}</strong></p>
+      </div>
+      <div class="money-field">
+        <label>Custo do serviço (R$)</label>
+        <input type="number" step="0.01" min="0" placeholder="0,00" value="${b.custo != null ? b.custo : ''}" data-id="${b.id}" class="custoInput">
+        <p style="margin-top:8px;">Ganho: <span class="ganho-value ${ganhoClasse(b)}" data-ganho-de="${b.id}">${b.ganho != null ? fmtMoeda(b.ganho) : '—'}</span></p>
+      </div>
+      <div class="card-actions">
+        <button class="salvar" data-id="${b.id}" data-valor="${b.valorServico}">Salvar custo</button>
+        ${comprovanteUrl ? `<button class="verComprovante" data-url="${comprovanteUrl}">Ver comprovante</button>` : '<button disabled>Sem comprovante</button>'}
+      </div>
+    `;
+    bookingsList.appendChild(card);
+
+    const custoInput = card.querySelector('.custoInput');
+    const ganhoSpan = card.querySelector(`[data-ganho-de="${b.id}"]`);
+    custoInput.addEventListener('input', () => {
+      const v = parseFloat(custoInput.value);
+      if(!isNaN(v)){
+        const ganho = Math.round((b.valorServico - v) * 100) / 100;
+        ganhoSpan.textContent = fmtMoeda(ganho);
+        ganhoSpan.className = 'ganho-value ' + (ganho >= 0 ? 'positivo' : 'negativo');
+      } else {
+        ganhoSpan.textContent = '—';
+      }
+    });
+
+    card.querySelector('.salvar').addEventListener('click', async (e) => {
+      const btn = e.target;
+      const valor = parseFloat(custoInput.value);
+      if(isNaN(valor)){
+        alert('Digite um custo válido antes de salvar.');
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = 'Salvando...';
+      try{
+        const resp = await fetch('/.netlify/functions/update-booking', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: b.id, custo: valor })
+        });
+        if(!resp.ok) throw new Error('Falha ao salvar');
+        btn.textContent = 'Salvo ✓';
+        setTimeout(() => { btn.textContent = 'Salvar custo'; btn.disabled = false; }, 1500);
+      } catch(err){
+        alert('Não consegui salvar agora. Tente novamente em instantes.');
+        btn.textContent = 'Salvar custo';
+        btn.disabled = false;
+      }
+    });
+
+    const verBtn = card.querySelector('.verComprovante');
+    if(verBtn){
+      verBtn.addEventListener('click', () => window.open(verBtn.dataset.url, '_blank', 'noopener'));
+    }
+  }
+
+  function ganhoClasse(b){
+    if(b.ganho == null) return '';
+    return b.ganho >= 0 ? 'positivo' : 'negativo';
+  }
+
+  function escapeHtml(str){
+    return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  }
+})();
+</script>
+</body>
+</html>
