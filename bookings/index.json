@@ -1,18 +1,1 @@
-[
-  {
-    "id": "1783195096241-6zicss",
-    "nome": "Teste Sistema Admin",
-    "telefone": "11999998888",
-    "data": "06/07/2026",
-    "horario": "08:00",
-    "servico": "Unha em Gel",
-    "valorServico": 270,
-    "local": "estabelecimento",
-    "custo": 100,
-    "ganho": 170,
-    "comprovantePath": "bookings/uploads/1783195096241-6zicss.png",
-    "status": "novo",
-    "createdAt": "2026-07-04T19:58:17.204Z",
-    "updatedAt": "2026-07-04T20:00:16.390Z"
-  }
-]
+[]
