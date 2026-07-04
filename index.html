@@ -594,7 +594,8 @@
     servicoKey:null,
     local:'estabelecimento',
     comprovanteNome:null,
-    comprovanteDataUrl:null
+    comprovanteDataUrl:null,
+    comprovanteType:null
   };
 
   const SERVICOS = {
@@ -836,21 +837,21 @@
       return;
     }
     state.comprovanteNome = file.name;
+    state.comprovanteType = file.type;
     btnFinalizar.disabled = false;
 
-    if(file.type.startsWith('image/')){
-      const reader = new FileReader();
-      reader.onload = function(ev){
-        state.comprovanteDataUrl = ev.target.result;
+    const reader = new FileReader();
+    reader.onload = function(ev){
+      state.comprovanteDataUrl = ev.target.result;
+      if(file.type.startsWith('image/')){
         previewComprovante.style.display = 'flex';
         previewComprovante.innerHTML = '<img src="'+ev.target.result+'" alt="comprovante"> Anexado: ' + file.name;
-      };
-      reader.readAsDataURL(file);
-    } else {
-      state.comprovanteDataUrl = null;
-      previewComprovante.style.display = 'flex';
-      previewComprovante.innerHTML = '📎 Anexado: ' + file.name;
-    }
+      } else {
+        previewComprovante.style.display = 'flex';
+        previewComprovante.innerHTML = '📎 Anexado: ' + file.name;
+      }
+    };
+    reader.readAsDataURL(file);
   });
 
   // ---------------- FINALIZAR / WHATSAPP ----------------
@@ -880,6 +881,25 @@
       'Local: ' + localTexto + '%0A' +
       'Sinal de 50%25 (' + fmtMoeda(sinal) + ') já enviado via PIX. Segue o comprovante em anexo!';
     btnWhatsapp.href = 'https://wa.me/5511984295971?text=' + msg;
+
+    // Envia o agendamento para o painel admin (grava no GitHub via função do Netlify).
+    // Isso roda em segundo plano e não bloqueia o fluxo da cliente mesmo se falhar.
+    fetch('/.netlify/functions/save-booking', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nome: state.nome,
+        telefone: state.telefone,
+        data: dataFmt,
+        horario: state.horario,
+        servico: servico.label,
+        valorServico: servico.preco,
+        local: state.local,
+        comprovanteBase64: state.comprovanteDataUrl || null,
+        comprovanteNome: state.comprovanteNome || null,
+        comprovanteType: state.comprovanteType || null
+      })
+    }).catch(function(){ /* silencioso: nao bloqueia o agendamento da cliente */ });
 
     irPara('screen4');
   });
