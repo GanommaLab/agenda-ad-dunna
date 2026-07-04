@@ -6,3 +6,6 @@
   for = "/*"
   [headers.values]
     X-Frame-Options = "SAMEORIGIN"
+
+[functions."backup-bookings"]
+  schedule = "@daily"
