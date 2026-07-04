@@ -1,17 +1,1 @@
-[
-  {
-    "id": "1783203195791-erqgmg",
-    "nome": "Teste Verificacao Push",
-    "telefone": "11999998888",
-    "data": "05/07/2026",
-    "horario": "08:00",
-    "servico": "Unha",
-    "valorServico": 45,
-    "local": "residencial",
-    "custo": null,
-    "ganho": null,
-    "comprovantePath": "bookings/uploads/1783203195791-erqgmg.png",
-    "status": "novo",
-    "createdAt": "2026-07-04T22:13:16.797Z"
-  }
-]
+[]
