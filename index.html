@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AD Dunna Beauty Studio — Agenda Eletrônica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Yellowtail&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blush-1:#f8e6df;
+    --blush-2:#f3d7cd;
+    --blush-3:#eeccc0;
+    --gold:#b9905a;
+    --gold-dark:#9c7642;
+    --rose-deep:#c47b7f;
+    --text-dark:#4a3630;
+    --text-soft:#7a6459;
+    --green:#6b8a57;
+    --white:#fffaf7;
+    --danger:#c0555a;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(160deg,#f3ddd3,#ecc9bd 55%,#e6bdb3);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px 12px;
+    color:var(--text-dark);
+  }
+  .app{
+    width:100%;
+    max-width:460px;
+    background:var(--white);
+    border-radius:28px;
+    box-shadow:0 25px 60px -15px rgba(120,70,60,0.35);
+    overflow:hidden;
+    position:relative;
+    min-height:640px;
+  }
+  .screen{
+    display:none;
+    min-height:640px;
+    position:relative;
+  }
+  .screen.active{display:block;}
+
+  /* ---------- SCREEN 1 ---------- */
+  #screen1{
+    background:linear-gradient(155deg,var(--blush-1) 0%,var(--blush-2) 55%,var(--blush-3) 100%);
+    padding:0;
+  }
+  #screen1 .content{
+    position:relative;
+    z-index:2;
+    padding:38px 32px 40px;
+    min-height:640px;
+    display:flex;
+    flex-direction:column;
+  }
+  .brand-badge{
+    width:100%;
+    max-width:260px;
+    margin:0 auto;
+    display:block;
+  }
+  .tagline{
+    font-size:0.95rem;
+    color:var(--text-soft);
+    margin:14px 0 26px 0;
+    letter-spacing:0.3px;
+    text-align:center;
+  }
+  .mini-brand{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    margin-bottom:18px;
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    color:var(--gold-dark);
+    font-size:1rem;
+    letter-spacing:0.5px;
+  }
+  .mini-brand .script{
+    font-family:'Yellowtail',cursive;
+    font-size:1.35rem;
+    font-weight:400;
+  }
+  form label{
+    display:block;
+    font-size:0.8rem;
+    font-weight:600;
+    color:var(--text-soft);
+    margin:14px 0 6px;
+    letter-spacing:0.3px;
+  }
+  input[type=text], input[type=tel], select{
+    width:100%;
+    padding:13px 14px;
+    border-radius:14px;
+    border:1.5px solid #e8d3c8;
+    background:rgba(255,255,255,0.75);
+    font-family:'Poppins',sans-serif;
+    font-size:0.95rem;
+    color:var(--text-dark);
+    outline:none;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  .upload-wrap{
+    position:relative;
+    border:1.5px dashed #d9b99e;
+    border-radius:14px;
+    background:rgba(255,255,255,0.55);
+    padding:18px 14px;
+    text-align:center;
+    cursor:pointer;
+  }
+  .upload-wrap span{
+    font-size:0.85rem;
+    color:var(--text-soft);
+  }
+  .upload-wrap span strong{color:var(--gold-dark);}
+  .upload-wrap input[type=file]{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    opacity:0;
+    cursor:pointer;
+  }
+  input:focus, select:focus{
+    border-color:var(--gold);
+    box-shadow:0 0 0 3px rgba(185,144,90,0.15);
+  }
+  .btn-primary{
+    margin-top:26px;
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:16px;
+    background:linear-gradient(120deg,var(--gold),var(--gold-dark));
+    color:#fff;
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    font-size:0.98rem;
+    letter-spacing:0.4px;
+    cursor:pointer;
+    box-shadow:0 10px 22px -8px rgba(156,118,66,0.6);
+    transition:transform .15s, box-shadow .15s, opacity .15s;
+    text-align:center;
+    display:block;
+    text-decoration:none;
+  }
+  .btn-primary:hover{transform:translateY(-1px);}
+  .btn-primary:disabled{
+    opacity:0.45;
+    cursor:not-allowed;
+    box-shadow:none;
+    transform:none;
+  }
+  .btn-secondary{
+    margin-top:12px;
+    width:100%;
+    padding:13px;
+    border-radius:16px;
+    border:1.5px solid #e8d3c8;
+    background:transparent;
+    color:var(--text-soft);
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    font-size:0.9rem;
+    cursor:pointer;
+  }
+  .field-error{
+    color:var(--danger);
+    font-size:0.78rem;
+    margin-top:6px;
+    display:none;
+  }
+
+  /* ---------- GENERIC SCREEN 2/3/4 ---------- */
+  #screen2 .content, #screen3 .content, #screen4 .content{
+    padding:28px 26px 34px;
+  }
+  .btn-back{
+    background:none;
+    border:none;
+    color:var(--gold-dark);
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    font-size:0.85rem;
+    cursor:pointer;
+    padding:0 0 14px 0;
+  }
+  h2{
+    font-family:'Playfair Display',serif;
+    font-size:1.5rem;
+    color:var(--gold-dark);
+    margin:0 0 18px 0;
+  }
+  h3{
+    font-family:'Poppins',sans-serif;
+    font-size:0.85rem;
+    color:var(--text-soft);
+    margin:0 0 8px 0;
+    font-weight:600;
+  }
+
+  .calendar-time-wrap{
+    display:flex;
+    flex-wrap:wrap;
+    gap:18px;
+    margin-bottom:18px;
+  }
+  .calendar{
+    flex:1 1 230px;
+    background:var(--blush-1);
+    border-radius:18px;
+    padding:14px;
+  }
+  .cal-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:10px;
+    font-weight:600;
+    color:var(--gold-dark);
+    font-size:0.88rem;
+  }
+  .cal-header button{
+    background:#fff;
+    border:none;
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    color:var(--gold-dark);
+    font-size:1rem;
+    cursor:pointer;
+  }
+  .cal-grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:4px;
+    text-align:center;
+  }
+  .cal-dow{
+    font-size:0.65rem;
+    color:var(--text-soft);
+    font-weight:600;
+    padding-bottom:4px;
+  }
+  .cal-day{
+    padding:7px 0;
+    border-radius:10px;
+    font-size:0.8rem;
+    cursor:pointer;
+    background:rgba(255,255,255,0.5);
+    color:var(--text-dark);
+  }
+  .cal-day.disabled{
+    color:#d8c6bc;
+    cursor:not-allowed;
+    background:transparent;
+  }
+  .cal-day.empty{visibility:hidden;cursor:default;}
+  .cal-day:not(.disabled):not(.empty):hover{background:#f0d9cd;}
+  .cal-day.selected{
+    background:var(--gold);
+    color:#fff;
+    font-weight:700;
+  }
+  .time-picker{
+    flex:1 1 150px;
+  }
+  .time-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    max-height:190px;
+    overflow-y:auto;
+    padding-right:2px;
+  }
+  .time-chip{
+    padding:7px 10px;
+    border-radius:10px;
+    background:var(--blush-1);
+    font-size:0.78rem;
+    cursor:pointer;
+    color:var(--text-dark);
+    border:1.5px solid transparent;
+  }
+  .time-chip.selected{
+    background:var(--gold);
+    color:#fff;
+  }
+
+  .price-display{
+    margin-top:8px;
+    font-size:0.85rem;
+    color:var(--gold-dark);
+    font-weight:600;
+    min-height:20px;
+  }
+
+  .location-options{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-top:6px;
+  }
+  .radio-card{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 14px;
+    border-radius:14px;
+    border:1.5px solid #e8d3c8;
+    background:rgba(255,255,255,0.6);
+    font-size:0.88rem;
+    cursor:pointer;
+  }
+  .radio-card input{width:auto;margin:0;}
+  .deslocamento-note{
+    font-size:0.78rem;
+    color:var(--rose-deep);
+    background:#fbeceb;
+    padding:10px 12px;
+    border-radius:12px;
+    margin:10px 0 0 0;
+  }
+  .summary-box{
+    margin-top:18px;
+    padding:14px 16px;
+    border-radius:14px;
+    background:var(--blush-1);
+    font-size:0.85rem;
+    line-height:1.6;
+  }
+  .summary-box strong{color:var(--gold-dark);}
+
+  .summary-card{
+    background:var(--blush-1);
+    border-radius:16px;
+    padding:16px 18px;
+    font-size:0.85rem;
+    line-height:1.8;
+    margin-bottom:18px;
+  }
+  .summary-card strong{color:var(--gold-dark);}
+
+  .pix-box{
+    background:linear-gradient(135deg,var(--blush-2),var(--blush-3));
+    border-radius:18px;
+    padding:18px 20px;
+    margin-bottom:20px;
+    text-align:center;
+  }
+  .pix-box p{margin:0 0 4px;font-size:0.8rem;color:var(--text-soft);}
+  .pix-key{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin:6px 0 14px;
+  }
+  .pix-key strong{
+    font-size:1.15rem;
+    color:var(--text-dark);
+    letter-spacing:0.3px;
+  }
+  .pix-key button{
+    border:none;
+    background:var(--gold-dark);
+    color:#fff;
+    padding:6px 12px;
+    border-radius:10px;
+    font-size:0.72rem;
+    font-weight:600;
+    cursor:pointer;
+  }
+  .sinal-label{font-size:0.8rem;color:var(--text-soft);margin-top:6px;}
+  .sinal-valor{
+    font-family:'Playfair Display',serif;
+    font-size:2rem;
+    color:var(--gold-dark);
+    font-weight:700;
+    margin:2px 0 0 0;
+  }
+  #comprovantePreview{
+    margin-top:10px;
+    font-size:0.82rem;
+    color:var(--green);
+    display:none;
+    align-items:center;
+    gap:8px;
+  }
+  #comprovantePreview img{
+    width:44px;height:44px;object-fit:cover;border-radius:8px;
+  }
+
+  .confirmation{
+    text-align:center;
+    padding-top:40px !important;
+  }
+  .check-icon{
+    width:70px;height:70px;
+    background:linear-gradient(120deg,var(--gold),var(--gold-dark));
+    border-radius:50%;
+    color:#fff;
+    font-size:2rem;
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 18px;
+  }
+  .confirmation p{
+    font-size:0.88rem;
+    color:var(--text-soft);
+    line-height:1.6;
+    margin-bottom:18px;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ============ SCREEN 1 — DADOS DA CLIENTE ============ -->
+  <section class="screen active" id="screen1">
+    <div class="content">
+      <svg class="brand-badge" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f6ddc0"/>
+            <stop offset="30%" stop-color="#c98f5e"/>
+            <stop offset="60%" stop-color="#a06a3f"/>
+            <stop offset="100%" stop-color="#7c4e30"/>
+          </linearGradient>
+          <linearGradient id="goldRing" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#e8c69f"/>
+            <stop offset="50%" stop-color="#b9905a"/>
+            <stop offset="100%" stop-color="#8a6238"/>
+          </linearGradient>
+        </defs>
+
+        <circle cx="130" cy="130" r="120" fill="none" stroke="url(#goldRing)" stroke-width="2"/>
+
+        <!-- paint splash motif -->
+        <path d="M25,132 C70,120 95,148 130,138 C165,128 190,150 235,130 C195,158 170,140 132,150 C94,160 62,150 25,132 Z" fill="#fbeee2" opacity="0.9"/>
+        <circle cx="45" cy="118" r="3.5" fill="#e7c9a8"/>
+        <circle cx="60" cy="105" r="2.5" fill="#e7c9a8"/>
+        <circle cx="205" cy="112" r="3" fill="#e7c9a8"/>
+        <circle cx="220" cy="128" r="2.5" fill="#e7c9a8"/>
+
+        <!-- nail polish bottle accent (right) -->
+        <g transform="translate(196,128)">
+          <rect x="0" y="10" width="20" height="24" rx="4" fill="url(#goldGrad)"/>
+          <rect x="6" y="0" width="8" height="12" rx="2" fill="url(#goldGrad)"/>
+        </g>
+        <!-- brush drip accent (left) -->
+        <g transform="translate(30,95)">
+          <rect x="0" y="0" width="7" height="20" rx="3" fill="url(#goldGrad)" transform="rotate(20 3 10)"/>
+        </g>
+
+        <text x="130" y="112" text-anchor="middle" font-family="'Playfair Display',serif" font-weight="700" font-size="66" fill="url(#goldGrad)" letter-spacing="2">AD</text>
+
+        <text x="130" y="172" text-anchor="middle" font-family="'Yellowtail',cursive" font-size="46" fill="url(#goldGrad)">Dunna</text>
+
+        <line x1="55" y1="197" x2="85" y2="197" stroke="#b9905a" stroke-width="1"/>
+        <text x="130" y="202" text-anchor="middle" font-family="'Poppins',sans-serif" font-weight="600" font-size="13" letter-spacing="3" fill="#9c7642">BEAUTY STUDIO</text>
+        <line x1="175" y1="197" x2="205" y2="197" stroke="#b9905a" stroke-width="1"/>
+
+        <path d="M95,218 C110,224 150,224 165,218" stroke="#c9a06c" stroke-width="1" fill="none"/>
+      </svg>
+      <p class="tagline">Agende seu horário com Ana Paula</p>
+      <form id="formCliente">
+        <label for="nomeCompleto">Nome completo</label>
+        <input type="text" id="nomeCompleto" placeholder="Digite seu nome completo" autocomplete="name">
+        <span class="field-error" id="erroNome">Por favor, informe seu nome completo.</span>
+
+        <label for="telefone">Telefone / WhatsApp</label>
+        <input type="tel" id="telefone" placeholder="(11) 90000-0000" autocomplete="tel">
+        <span class="field-error" id="erroTelefone">Por favor, informe um telefone válido.</span>
+
+        <button type="submit" class="btn-primary">Continuar</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ SCREEN 2 — AGENDAMENTO ============ -->
+  <section class="screen" id="screen2">
+    <div class="content">
+      <div class="mini-brand">AD <span class="script">Dunna</span> Beauty Studio</div>
+      <button class="btn-back" data-target="screen1">← Voltar</button>
+      <h2>Escolha o dia e horário</h2>
+
+      <div class="calendar-time-wrap">
+        <div class="calendar">
+          <div class="cal-header">
+            <button type="button" id="prevMonth">‹</button>
+            <span id="monthLabel"></span>
+            <button type="button" id="nextMonth">›</button>
+          </div>
+          <div class="cal-grid" id="calGrid"></div>
+        </div>
+        <div class="time-picker">
+          <h3>Horário</h3>
+          <div class="time-grid" id="timeGrid"></div>
+        </div>
+      </div>
+
+      <label for="servico">Tipo de serviço</label>
+      <select id="servico">
+        <option value="">Selecione um serviço...</option>
+      </select>
+      <div class="price-display" id="precoServico"></div>
+
+      <label>Local do atendimento</label>
+      <div class="location-options">
+        <label class="radio-card">
+          <input type="radio" name="local" value="estabelecimento" checked>
+          No estúdio da Ana Paula
+        </label>
+        <label class="radio-card">
+          <input type="radio" name="local" value="residencial">
+          Residencial (na sua casa)
+        </label>
+      </div>
+      <p class="deslocamento-note" id="deslocamentoNote" style="display:none;">
+        🚗 Atendimento residencial: a taxa de deslocamento é combinada diretamente com a Ana Paula, de acordo com o endereço.
+      </p>
+
+      <div class="summary-box" id="resumoValor" style="display:none;"></div>
+
+      <button class="btn-primary" id="btnProsseguir" disabled>Prosseguir com o pedido</button>
+    </div>
+  </section>
+
+  <!-- ============ SCREEN 3 — PAGAMENTO PIX ============ -->
+  <section class="screen" id="screen3">
+    <div class="content">
+      <div class="mini-brand">AD <span class="script">Dunna</span> Beauty Studio</div>
+      <button class="btn-back" data-target="screen2">← Voltar</button>
+      <h2>Confirme e pague o sinal</h2>
+
+      <div class="summary-card" id="resumoFinal"></div>
+
+      <div class="pix-box">
+        <p>Chave PIX (Ana Paula)</p>
+        <div class="pix-key">
+          <strong>11 98429-5971</strong>
+          <button type="button" id="btnCopiarPix">Copiar</button>
+        </div>
+        <p class="sinal-label">Sinal de 50% para confirmar o agendamento</p>
+        <p class="sinal-valor" id="sinalValor">R$ 0,00</p>
+      </div>
+
+      <label for="comprovante">Enviar comprovante do PIX</label>
+      <div class="upload-wrap">
+        <span>📎 Toque para <strong>anexar o comprovante</strong> (foto ou PDF)</span>
+        <input type="file" id="comprovante" accept="image/*,.pdf">
+      </div>
+      <div id="comprovantePreview"></div>
+
+      <button class="btn-primary" id="btnFinalizar" disabled>Finalizar agendamento</button>
+    </div>
+  </section>
+
+  <!-- ============ SCREEN 4 — CONFIRMAÇÃO ============ -->
+  <section class="screen" id="screen4">
+    <div class="content confirmation">
+      <div class="mini-brand">AD <span class="script">Dunna</span> Beauty Studio</div>
+      <div class="check-icon">✓</div>
+      <h2>Agendamento enviado!</h2>
+      <p>Recebemos seus dados. Toque no botão abaixo para enviar o resumo e o comprovante para a Ana Paula pelo WhatsApp e confirmar seu horário.</p>
+      <div class="summary-card" id="resumoConfirmacao" style="text-align:left;"></div>
+      <a class="btn-primary" id="btnWhatsapp" target="_blank" rel="noopener">Enviar confirmação via WhatsApp</a>
+      <button class="btn-secondary" id="btnNovoAgendamento" type="button">Novo agendamento</button>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  // ---------------- STATE ----------------
+  const state = {
+    nome:'', telefone:'',
+    dataSelecionada:null, // Date object
+    horario:null,
+    servicoKey:null,
+    local:'estabelecimento',
+    comprovanteNome:null,
+    comprovanteDataUrl:null
+  };
+
+  const SERVICOS = {
+    unha:{label:'Unha', preco:45},
+    pe:{label:'Só pé', preco:45},
+    unha_pe:{label:'Unha e pé', preco:80},
+    gel:{label:'Unha em Gel', preco:270},
+    manutencao_gel:{label:'Manutenção de unha em Gel', preco:180}
+  };
+
+  function fmtMoeda(v){
+    return 'R$ ' + v.toFixed(2).replace('.', ',');
+  }
+
+  // ---------------- NAVEGAÇÃO ----------------
+  function irPara(id){
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  document.querySelectorAll('.btn-back').forEach(btn=>{
+    btn.addEventListener('click', ()=> irPara(btn.dataset.target));
+  });
+
+  // ---------------- SCREEN 1 ----------------
+  const formCliente = document.getElementById('formCliente');
+  formCliente.addEventListener('submit', function(e){
+    e.preventDefault();
+    const nome = document.getElementById('nomeCompleto').value.trim();
+    const tel = document.getElementById('telefone').value.trim();
+    let ok = true;
+
+    if(nome.length < 3 || nome.indexOf(' ') === -1){
+      document.getElementById('erroNome').style.display='block';
+      ok = false;
+    } else {
+      document.getElementById('erroNome').style.display='none';
+    }
+    const telDigits = tel.replace(/\D/g,'');
+    if(telDigits.length < 10){
+      document.getElementById('erroTelefone').style.display='block';
+      ok = false;
+    } else {
+      document.getElementById('erroTelefone').style.display='none';
+    }
+    if(!ok) return;
+
+    state.nome = nome;
+    state.telefone = tel;
+    irPara('screen2');
+  });
+
+  // ---------------- CALENDÁRIO ----------------
+  let calRef = new Date();
+  calRef.setDate(1);
+  const monthLabel = document.getElementById('monthLabel');
+  const calGrid = document.getElementById('calGrid');
+  const MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  const DOWS = ['D','S','T','Q','Q','S','S'];
+
+  function renderCalendario(){
+    calGrid.innerHTML = '';
+    monthLabel.textContent = MESES[calRef.getMonth()] + ' ' + calRef.getFullYear();
+
+    DOWS.forEach(d=>{
+      const el = document.createElement('div');
+      el.className = 'cal-dow';
+      el.textContent = d;
+      calGrid.appendChild(el);
+    });
+
+    const year = calRef.getFullYear();
+    const month = calRef.getMonth();
+    const firstDow = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month+1, 0).getDate();
+
+    const hoje = new Date();
+    hoje.setHours(0,0,0,0);
+
+    for(let i=0;i<firstDow;i++){
+      const empty = document.createElement('div');
+      empty.className = 'cal-day empty';
+      calGrid.appendChild(empty);
+    }
+
+    for(let d=1; d<=daysInMonth; d++){
+      const cell = document.createElement('div');
+      cell.className = 'cal-day';
+      cell.textContent = d;
+      const thisDate = new Date(year, month, d);
+      thisDate.setHours(0,0,0,0);
+
+      if(thisDate < hoje){
+        cell.classList.add('disabled');
+      } else {
+        cell.addEventListener('click', ()=>{
+          document.querySelectorAll('.cal-day.selected').forEach(c=>c.classList.remove('selected'));
+          cell.classList.add('selected');
+          state.dataSelecionada = thisDate;
+          atualizarResumoEBotao();
+        });
+        if(state.dataSelecionada && thisDate.getTime() === state.dataSelecionada.getTime()){
+          cell.classList.add('selected');
+        }
+      }
+      calGrid.appendChild(cell);
+    }
+  }
+  document.getElementById('prevMonth').addEventListener('click', ()=>{
+    calRef.setMonth(calRef.getMonth()-1);
+    renderCalendario();
+  });
+  document.getElementById('nextMonth').addEventListener('click', ()=>{
+    calRef.setMonth(calRef.getMonth()+1);
+    renderCalendario();
+  });
+  renderCalendario();
+
+  // ---------------- HORÁRIOS ----------------
+  const timeGrid = document.getElementById('timeGrid');
+  function gerarHorarios(){
+    const horarios = [];
+    for(let h=8; h<=19; h++){
+      horarios.push(String(h).padStart(2,'0')+':00');
+      if(h<19) horarios.push(String(h).padStart(2,'0')+':30');
+    }
+    horarios.forEach(hr=>{
+      const chip = document.createElement('div');
+      chip.className = 'time-chip';
+      chip.textContent = hr;
+      chip.addEventListener('click', ()=>{
+        document.querySelectorAll('.time-chip.selected').forEach(c=>c.classList.remove('selected'));
+        chip.classList.add('selected');
+        state.horario = hr;
+        atualizarResumoEBotao();
+      });
+      timeGrid.appendChild(chip);
+    });
+  }
+  gerarHorarios();
+
+  // ---------------- SERVIÇO ----------------
+  const selectServico = document.getElementById('servico');
+  Object.keys(SERVICOS).forEach(key=>{
+    const opt = document.createElement('option');
+    opt.value = key;
+    opt.textContent = SERVICOS[key].label + ' — ' + fmtMoeda(SERVICOS[key].preco);
+    selectServico.appendChild(opt);
+  });
+  const precoServico = document.getElementById('precoServico');
+  selectServico.addEventListener('change', ()=>{
+    state.servicoKey = selectServico.value || null;
+    if(state.servicoKey){
+      precoServico.textContent = 'Valor do serviço: ' + fmtMoeda(SERVICOS[state.servicoKey].preco);
+    } else {
+      precoServico.textContent = '';
+    }
+    atualizarResumoEBotao();
+  });
+
+  // ---------------- LOCAL ----------------
+  const deslocamentoNote = document.getElementById('deslocamentoNote');
+  document.querySelectorAll('input[name="local"]').forEach(radio=>{
+    radio.addEventListener('change', ()=>{
+      state.local = radio.value;
+      deslocamentoNote.style.display = (state.local === 'residencial') ? 'block' : 'none';
+      atualizarResumoEBotao();
+    });
+  });
+
+  // ---------------- RESUMO / VALIDAÇÃO SCREEN 2 ----------------
+  const resumoValor = document.getElementById('resumoValor');
+  const btnProsseguir = document.getElementById('btnProsseguir');
+
+  function atualizarResumoEBotao(){
+    const completo = state.dataSelecionada && state.horario && state.servicoKey;
+    btnProsseguir.disabled = !completo;
+
+    if(completo){
+      const servico = SERVICOS[state.servicoKey];
+      const dataFmt = state.dataSelecionada.toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit', year:'numeric'});
+      const localTexto = state.local === 'residencial' ? 'Residencial (taxa de deslocamento a combinar)' : 'No estúdio da Ana Paula';
+      resumoValor.style.display = 'block';
+      resumoValor.innerHTML =
+        '<strong>Data:</strong> ' + dataFmt + '<br>' +
+        '<strong>Horário:</strong> ' + state.horario + '<br>' +
+        '<strong>Serviço:</strong> ' + servico.label + ' — ' + fmtMoeda(servico.preco) + '<br>' +
+        '<strong>Local:</strong> ' + localTexto;
+    } else {
+      resumoValor.style.display = 'none';
+    }
+  }
+
+  document.getElementById('btnProsseguir').addEventListener('click', ()=>{
+    montarResumoPagamento();
+    irPara('screen3');
+  });
+
+  // ---------------- SCREEN 3 — PAGAMENTO ----------------
+  const resumoFinal = document.getElementById('resumoFinal');
+  const sinalValorEl = document.getElementById('sinalValor');
+
+  function montarResumoPagamento(){
+    const servico = SERVICOS[state.servicoKey];
+    const dataFmt = state.dataSelecionada.toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit', year:'numeric'});
+    const localTexto = state.local === 'residencial' ? 'Residencial (taxa de deslocamento a combinar)' : 'No estúdio da Ana Paula';
+
+    resumoFinal.innerHTML =
+      '<strong>Cliente:</strong> ' + state.nome + '<br>' +
+      '<strong>Telefone:</strong> ' + state.telefone + '<br>' +
+      '<strong>Data:</strong> ' + dataFmt + ' às ' + state.horario + '<br>' +
+      '<strong>Serviço:</strong> ' + servico.label + ' — ' + fmtMoeda(servico.preco) + '<br>' +
+      '<strong>Local:</strong> ' + localTexto;
+
+    const sinal = servico.preco * 0.5;
+    sinalValorEl.textContent = fmtMoeda(sinal);
+  }
+
+  document.getElementById('btnCopiarPix').addEventListener('click', function(){
+    const chave = '11984295971';
+    navigator.clipboard.writeText(chave).then(()=>{
+      const btn = document.getElementById('btnCopiarPix');
+      const original = btn.textContent;
+      btn.textContent = 'Copiado!';
+      setTimeout(()=>{ btn.textContent = original; }, 1800);
+    }).catch(()=>{});
+  });
+
+  // ---------------- UPLOAD COMPROVANTE ----------------
+  const inputComprovante = document.getElementById('comprovante');
+  const previewComprovante = document.getElementById('comprovantePreview');
+  const btnFinalizar = document.getElementById('btnFinalizar');
+
+  inputComprovante.addEventListener('change', function(){
+    const file = inputComprovante.files[0];
+    if(!file){
+      previewComprovante.style.display = 'none';
+      btnFinalizar.disabled = true;
+      return;
+    }
+    state.comprovanteNome = file.name;
+    btnFinalizar.disabled = false;
+
+    if(file.type.startsWith('image/')){
+      const reader = new FileReader();
+      reader.onload = function(ev){
+        state.comprovanteDataUrl = ev.target.result;
+        previewComprovante.style.display = 'flex';
+        previewComprovante.innerHTML = '<img src="'+ev.target.result+'" alt="comprovante"> Anexado: ' + file.name;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      state.comprovanteDataUrl = null;
+      previewComprovante.style.display = 'flex';
+      previewComprovante.innerHTML = '📎 Anexado: ' + file.name;
+    }
+  });
+
+  // ---------------- FINALIZAR / WHATSAPP ----------------
+  const resumoConfirmacao = document.getElementById('resumoConfirmacao');
+  const btnWhatsapp = document.getElementById('btnWhatsapp');
+
+  btnFinalizar.addEventListener('click', function(){
+    const servico = SERVICOS[state.servicoKey];
+    const dataFmt = state.dataSelecionada.toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit', year:'numeric'});
+    const localTexto = state.local === 'residencial' ? 'Residencial (taxa de deslocamento a combinar)' : 'No estúdio da Ana Paula';
+    const sinal = servico.preco * 0.5;
+
+    resumoConfirmacao.innerHTML =
+      '<strong>Cliente:</strong> ' + state.nome + '<br>' +
+      '<strong>Telefone:</strong> ' + state.telefone + '<br>' +
+      '<strong>Data:</strong> ' + dataFmt + ' às ' + state.horario + '<br>' +
+      '<strong>Serviço:</strong> ' + servico.label + ' — ' + fmtMoeda(servico.preco) + '<br>' +
+      '<strong>Local:</strong> ' + localTexto + '<br>' +
+      '<strong>Sinal pago (50%):</strong> ' + fmtMoeda(sinal) + '<br>' +
+      '<strong>Comprovante:</strong> ' + (state.comprovanteNome || '—');
+
+    const msg = 'Olá Ana Paula! Gostaria de confirmar meu agendamento:%0A' +
+      'Nome: ' + state.nome + '%0A' +
+      'Telefone: ' + state.telefone + '%0A' +
+      'Data: ' + dataFmt + ' às ' + state.horario + '%0A' +
+      'Serviço: ' + servico.label + ' (' + fmtMoeda(servico.preco) + ')%0A' +
+      'Local: ' + localTexto + '%0A' +
+      'Sinal de 50%25 (' + fmtMoeda(sinal) + ') já enviado via PIX. Segue o comprovante em anexo!';
+    btnWhatsapp.href = 'https://wa.me/5511984295971?text=' + msg;
+
+    irPara('screen4');
+  });
+
+  document.getElementById('btnNovoAgendamento').addEventListener('click', function(){
+    // Reseta apenas os campos de agendamento, mantém nome/telefone
+    state.dataSelecionada = null;
+    state.horario = null;
+    state.servicoKey = null;
+    state.local = 'estabelecimento';
+    state.comprovanteNome = null;
+    state.comprovanteDataUrl = null;
+
+    document.querySelectorAll('.cal-day.selected').forEach(c=>c.classList.remove('selected'));
+    document.querySelectorAll('.time-chip.selected').forEach(c=>c.classList.remove('selected'));
+    selectServico.value = '';
+    precoServico.textContent = '';
+    document.querySelector('input[name="local"][value="estabelecimento"]').checked = true;
+    deslocamentoNote.style.display = 'none';
+    resumoValor.style.display = 'none';
+    btnProsseguir.disabled = true;
+    inputComprovante.value = '';
+    previewComprovante.style.display = 'none';
+    btnFinalizar.disabled = true;
+
+    irPara('screen2');
+  });
+
+})();
+</script>
+</body>
+</html>
