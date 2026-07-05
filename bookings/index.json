@@ -8,10 +8,11 @@
     "servico": "Unha",
     "valorServico": 45,
     "local": "residencial",
-    "custo": null,
-    "ganho": null,
+    "custo": 5,
+    "ganho": 40,
     "comprovantePath": "bookings/uploads/1783293618522-pbrgri.jpg",
     "status": "novo",
-    "createdAt": "2026-07-05T23:20:19.690Z"
+    "createdAt": "2026-07-05T23:20:19.690Z",
+    "updatedAt": "2026-07-05T23:23:48.278Z"
   }
 ]
