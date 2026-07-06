@@ -1,0 +1,18 @@
+[
+  {
+    "id": "1783293618522-pbrgri",
+    "nome": "Ana Claudia Duarte",
+    "telefone": "11930165320",
+    "data": "11/07/2026",
+    "horario": "10:00",
+    "servico": "Unha",
+    "valorServico": 45,
+    "local": "residencial",
+    "custo": 5,
+    "ganho": 40,
+    "comprovantePath": "bookings/uploads/1783293618522-pbrgri.jpg",
+    "status": "novo",
+    "createdAt": "2026-07-05T23:20:19.690Z",
+    "updatedAt": "2026-07-05T23:23:48.278Z"
+  }
+]
