@@ -14,5 +14,20 @@
     "status": "novo",
     "createdAt": "2026-07-05T23:20:19.690Z",
     "updatedAt": "2026-07-05T23:23:48.278Z"
+  },
+  {
+    "id": "1783361265485-xmjem6",
+    "nome": "Mariana duarte",
+    "telefone": "11962685668",
+    "data": "11/07/2026",
+    "horario": "11:00",
+    "servico": "Unha e pé",
+    "valorServico": 80,
+    "local": "residencial",
+    "custo": null,
+    "ganho": null,
+    "comprovantePath": "bookings/uploads/1783361265485-xmjem6.png",
+    "status": "novo",
+    "createdAt": "2026-07-06T18:07:46.964Z"
   }
 ]
